@@ -1,0 +1,104 @@
+[14012]Implement Float16Array, Math.f16round, and related DataView.
+"Deoptimize Maglev and Turbofan until there is machine-level support."
+https://github.com/tc39/proposal-float16array
+https://chromium-review.googlesource.com/c/v8/v8/+/5082566
+
+[327517308][wasm-imported-strings] Fix Number-to-uint32 conversions
+https://chromium-review.googlesource.com/c/v8/v8/+/5339898
+./d8 --wasm-staging regress-327517308.js
+https://github.com/v8/v8/blob/030f11450be0634c7f4c9c156adbdb3509b100c4/test/mjsunit/regress/wasm/regress-327517308.js
+
+[1505224][maglev]DCHECK failure in is_loadable() in maglev-ir.h.
+https://chromium-review.googlesource.com/c/v8/v8/+/5062389
+https://issues.chromium.org/issues/40945827
+
+[326091155][maglev] Simple escape analysis for inlined allocated objects 
+https://chromium-review.googlesource.com/c/v8/v8/+/5306934
+./d8 --allow-natives-syntax --maglev --no-always-turbofan alias-materialized-objects.js
+https://github.com/v8/v8/blob/576176291b947034ea598ea034f225387bb673f1/test/mjsunit/maglev/alias-materialized-objects.js
+
+[327643791][wasm-imported-strings] Fix string-from-data fast path.
+https://chromium-review.googlesource.com/c/v8/v8/+/5345411
+./d8 --wasm-staging regress-327643791.js
+https://github.com/v8/v8/blob/8dd7bd9b9886d59410ca8a42a9344450272676f9/test/mjsunit/regress/wasm/regress-327643791.js
+
+(CVE-2024-2173)[$12000][325893559][wasm][wasm-to-js wrapper]OOB memory access in V8 due to a missing bounds check in tier-up of wasm-to-js wrapper.
+https://chromium-review.googlesource.com/c/v8/v8/+/5323850
+
+(CVE-2024-2174)[$7000][325866363][wasm]Inappropriate implementation in V8.
+Use a previously defined safepoint which might have
+tagged spill slots which are not valid any more at the protected instruction.
+https://chromium-review.googlesource.com/c/v8/v8/+/5317578
+
+[326091155]Revert "[maglev] Simple escape analysis for inlined allocated objects"
+https://chromium-review.googlesource.com/c/v8/v8/+/5348996
+Quote
+xvonfers
+@xvonfers
+·
+Mar 6
+[326091155][maglev] Simple escape analysis for inlined allocated objects 
+https://chromium-review.googlesource.com/c/v8/v8/+/5306934
+./d8 --allow-natives-syntax --maglev --no-always-turbofan alias-materialized-objects.js
+https://github.com/v8/v8/blob/576176291b947034ea598ea034f225387bb673f1/test/mjsunit/maglev/alias-materialized-objects.js
+
+[1505355][maglev]Type cast failed in CAST(LoadFromObject(machine_type, object, IntPtrConstant(offset - kHeapObjectTag)))
+https://issues.chromium.org/issues/40945971
+./d8 --allow-natives-syntax regression-crbug-1505355.js
+https://chromium.googlesource.com/v8/v8/+/62c1f1fc760ad22f4e68d0e51bb35624414edc25/test/mjsunit/regress/regression-crbug-1505355.js
+
+[12716][revec][wasm][turboshaft]
+Support revectorization of Simd128ShiftOp
+https://chromium-review.googlesource.com/c/v8/v8/+/5342939
+Support revectorization of Ternary op(S128Select) in turboshaft
+https://chromium-review.googlesource.com/c/v8/v8/+/5347281
+
+[1505311][maglev]DCHECK failure in id_ != kInvalidNodeId in maglev-ir.h
+https://issues.chromium.org/issues/40945924
+https://chromium-review.googlesource.com/c/v8/v8/+/5067474
+
+[328483400][maglev] Change overzealous DCHECK in GetDeoptFrameForLazyDeopt
+https://chromium-review.googlesource.com/c/v8/v8/+/5351785
+./d8 --allow-natives-syntax --maglev regress-328483400.js
+https://github.com/v8/v8/blob/1b90bcf8c66f240d84cc6a6dc138b73b8f35befb/test/mjsunit/maglev/regress-328483400.js
+
+[8800][maglev] Avoid deopt loop when optimizing builtin calls
+https://chromium-review.googlesource.com/c/v8/v8/+/5350602
+
+[v8:7700, 326091155, 328751844][maglev] Add flag and disable escape analysis.
+Temporarily disable escape analysis until all known
+bugs are fixed.
+https://chromium-review.googlesource.com/c/v8/v8/+/5358394
+
+[v8:8800, 326091155][maglev] Inline some arguments object allocation.
+https://chromium-review.googlesource.com/c/v8/v8/+/5344756
+
+[328676392][maglev] Always escape receiver for inlined functions.
+https://chromium-review.googlesource.com/c/v8/v8/+/5361035
+./d8 --allow-natives-syntax --maglev --maglev-inlining --maglev-escape-analysis regress-328676392.js
+https://github.com/v8/v8/blob/59c8a4462e8b390f95462e0d772ce7d58ffd596e/test/mjsunit/maglev/regress-328676392.js
+
+[7700][maglev] Enable osr phi untagging
+https://chromium-review.googlesource.com/c/v8/v8/+/5340718
+
+[328868985][maglev]Give fresh object ids in inlined functions
+https://chromium-review.googlesource.com/c/v8/v8/+/5361455
+./d8 --allow-natives-syntax --maglev --maglev-inlining  --maglev-escape-analysis regress-328868985.js
+https://github.com/v8/v8/blob/8ed9229d1e45dbb5e0d3bdd44fcd4fccd9d762d0/test/mjsunit/maglev/regress-328868985.js
+
+[328846303, 326091155][maglev] Consider HoleNaNs when create deopt info for holey double fixed arrays.
+https://chromium-review.googlesource.com/c/v8/v8/+/5366200
+./d8 --allow-natives-syntax --maglev --no-use-ic --maglev-escape-analysis regress-328846303.js
+https://github.com/v8/v8/blob/3270515849b3652bc3ae58bdbe00b9612ad956c6/test/mjsunit/maglev/regress-328846303.js
+
+[328680228, 326091155][maglev] Always escape inlined arguments since they might be accessed by an arguments object later on.
+https://chromium-review.googlesource.com/c/v8/v8/+/5361782
+./d8 --allow-natives-syntax --maglev --maglev-inlining --maglev-escape-analysis regress-328680228.js
+https://github.com/v8/v8/blob/6ff81a19bc79d1bb3047dbfa1ab03d411a2be5ec/test/mjsunit/maglev/regress-328680228.js
+
+[14108][wasm][turboshaft] Optimize statically-in-bounds memory offsets.
+https://chromium-review.googlesource.com/c/v8/v8/+/5367024
+
+[326091155][maglev] Enable escape analysis.
+https://chromium-review.googlesource.com/c/v8/v8/+/5366029
+
