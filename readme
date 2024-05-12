@@ -523,3 +523,180 @@ https://chromium-review.googlesource.com/c/v8/v8/+/5490093
 Regress test:
 ./d8 --no-lazy-feedback-allocation regress-crbug-336852492.js
 https://github.com/v8/v8/blob/b1378683b389c8b392da1a2bd3d110fdf96e867b/test/mjsunit/regress/regress-crbug-336852492.js
+
+[335082212][wasm] Collect and process feedback for call_indirect.
+https://chromium-review.googlesource.com/c/v8/v8/+/5487863
+
+[42204525][turboshaft][Maglev-to-ts]Support named load on smis and cst key load:
+https://chromium-review.googlesource.com/c/v8/v8/+/5494069
+
+[337069178][maglev] Set elements kind to holey if constructing array of possibly non-zero length:
+https://chromium-review.googlesource.com/c/v8/v8/+/5490696
+
+(CVE-2024-3914)[330759272][DOMArrayBuffer]UAF in v8.
+"Removing this newly introduced CHECK to be able to merge fixes in this area - we still violate this invariant but the fixes are a step into the right direction."😅
+https://chromium-review.googlesource.com/c/chromium/src/+/5387887
+https://chromium-review.googlesource.com/c/chromium/src/+/5419329
+
+[1520200][$8000][maps]Signal SIGSEGV in v8
+https://chromium-review.googlesource.com/c/v8/v8/+/5225046
+https://chromium-review.googlesource.com/c/v8/v8/+/5280694
+https://issues.chromium.org/issues/41493175
+PoC:
+./d8 --allow-natives-syntax --jit-fuzzing --optimize-for-size --stress-concurrent-allocation poc.js 
+https://issues.chromium.org/action/issues/41493175/attachments/53263905?download=true
+
+(CVE-2024-2884)SEGV in turboshaft-loop-peeling
+This will allow attackers to forge malformed objects on the v8 heap and then leak it to user space through another fakeobj vulnerability -> AAR primitive, thereby achieving a complete exploit.
+https://issues.chromium.org/issues/41491373
+
+[1520312][$8000][wasm][turboshaft][ia32]Debug check failed: g.ValueFitsIntoImmediate(displacement == 0 (-1 vs. 0)). in v8
+https://issues.chromium.org/issues/41493286
+PoC:
+./d8 --future --allow-natives-syntax --turboshaft-wasm-instruction-selection-staged  poc.js
+https://issues.chromium.org/action/issues/41493286/attachments/53164711?download=false
+
+[1520311][$7000][turboshaft][wasm]Debug check failed: element_size_log2 == 0 (\x2 vs. 0).
+https://chromium-review.googlesource.com/c/v8/v8/+/5239031
+https://issues.chromium.org/issues/41493285
+PoC:
+./d8 --future poc.js
+https://issues.chromium.org/action/issues/41493285/attachments/53319762?download=false
+
+[1521770][maglev]DCHECK failure in node->options() == std::tuple{std::forward<Args>(args)...} in maglev-graph-build is now public.
+Available expressions are not preserved across exceptions.
+https://chromium-review.googlesource.com/c/v8/v8/+/5245405
+https://issues.chromium.org/issues/41494738
+Issue manually filed by 
+@5aelo
+Quote
+xvonfers
+@xvonfers
+·
+Jan 30
+[7700][maglev]
+NaN support in BuildCheckValue
+https://chromium-review.googlesource.com/c/v8/v8/+/5244669
+Support OOB keyed load on JSArrays and JSObjects
+https://chromium-review.googlesource.com/c/v8/v8/+/5237469
+[1521770,1521643]CSE: clear available expressions for exception handlers
+https://chromium-review.googlesource.com/c/v8/v8/+/5245405
+
+[334120897][wasm][sandbox]In-sandbox corruption could cause i64 values to be passed to functions expecting an i32 -> SBX:
+https://chromium-review.googlesource.com/c/v8/v8/+/5494364
+Regress test:
+./d8 --wasm-staging --sandbox-testing regress-334120897.js
+https://github.com/v8/v8/blob/5942a14103720910a8c6a0aebc67f4314dd8fdd9/test/mjsunit/sandbox/regress/regress-334120897.js
+
+[337870524][wasm][liftoff] Fix overly strict DCHECK:
+https://chromium-review.googlesource.com/c/v8/v8/+/5509656
+Regress test:
+./d8 regress-337870524.js
+https://github.com/v8/v8/blob/0f647b4d19d871b43ea40dd1f9c839f2b4b5d9aa/test/mjsunit/regress/wasm/regress-337870524.js
+
+[41494766][maglev] Properly fix context slot analysis confusion:
+https://chromium-review.googlesource.com/c/v8/v8/+/5497160
+Regress test(changed):
+./d8 --allow-natives-syntax regress-41494766.js
+https://github.com/v8/v8/blob/087afa34459e5ea85d07a1c20cc909a6653513c8/test/mjsunit/maglev/regress-41494766.js
+Quote
+xvonfers
+@xvonfers
+·
+Apr 26
+[41494766][maglev][osr] Fix context slot analysis confusion
+https://chromium-review.googlesource.com/c/v8/v8/+/5481577
+Regress test:
+./d8 --allow-natives-syntax regress-41494766.js
+https://github.com/v8/v8/blob/610383620ba5c73a8611682018f257c56d447fc3/test/mjsunit/maglev/regress-41494766.js
+
+[7700][maglev] Eager deopt previously unvisited catch blocks.
+This allows us to ignore the catch block for optimization across it. Better would be to lazy deopt code that throws if the target catch handler wasn't generated.
+https://chromium-review.googlesource.com/c/v8/v8/+/5498885
+
+[42204525][turboshaft][Maglev-to-ts] Support StoreGlobal
+https://chromium-review.googlesource.com/c/v8/v8/+/5512709
+
+[42204525][turboshaft][Maglev-to-ts]Support RestLength
+https://chromium-review.googlesource.com/c/v8/v8/+/5513448
+
+[335479495][wasm] Fix WasmNull body descriptor
+https://chromium-review.googlesource.com/c/v8/v8/+/5509654
+
+[1520697][$8000][Turbofan]Debug check failed: start_instr <= end_instr(994 vs. 0).
+https://chromium-review.googlesource.com/c/v8/v8/+/5233669
+https://chromium-review.googlesource.com/c/v8/v8/+/5250114
+https://issues.chromium.org/issues/41493674
+PoC:
+./d8 --allow-natives-syntax --jit-fuzzing --turboshaft-loop-peeling poc.js
+https://issues.chromium.org/action/issues/41493674/attachments/53087948?download=true
+
+[42204618][deoptimizer][wasm] Support literal values.
+This CL adds support for literals (i.e. values that are constants in the optimizing compiler) to the wasm deoptimization.
+https://chromium-review.googlesource.com/c/v8/v8/+/5501046
+
+[42204618][deoptimizer][wasm] Add support for parameter stack slots.
+This adds support for deopting a function that has parameters passed via stack slots.
+https://chromium-review.googlesource.com/c/v8/v8/+/5498887
+
+[7700][maglev] Lazy deopt on first throw to a so-far unused catch block.
+This allows us to skip emitting code for the catch block entirely.
+https://chromium-review.googlesource.com/c/v8/v8/+/5516582
+
+[1521643][$8000][maglev]Debug check failed: is_loadable(). in v8:
+https://issues.chromium.org/issues/41494611
+./d8 --allow-natives-syntax --optimize-on-next-call-optimizes-to-maglev --maglev-cse poc.js
+https://issues.chromium.org/action/issues/41494611/attachments/53118867?download=true
+@Kipreyyy
+Quote
+xvonfers
+@xvonfers
+·
+Jan 30
+[7700][maglev]
+NaN support in BuildCheckValue
+https://chromium-review.googlesource.com/c/v8/v8/+/5244669
+Support OOB keyed load on JSArrays and JSObjects
+https://chromium-review.googlesource.com/c/v8/v8/+/5237469
+[1521770,1521643]CSE: clear available expressions for exception handlers
+https://chromium-review.googlesource.com/c/v8/v8/+/5245405
+
+[338457109][maglev][cse] Don't cse ConvertReceiver since it can return unique JSPrimitiveWrapper's.
+https://chromium-review.googlesource.com/c/v8/v8/+/5516846
+Regress test:
+./d8 --allow-natives-syntax --maglev regress-338457109.js
+https://github.com/v8/v8/blob/effc6b92fa59f0a0c128e49d81a2ceba3941346c/test/mjsunit/maglev/regress-338457109.js
+
+[42204618][deoptimizer][wasm]Do not emit deopt node in case of non-inlined targets
+ Causing an OOB array access if the last known polymorphic / monomorphic call target is not inlined, having a deopt node on the slow path could cause deopt loops.
+https://chromium-review.googlesource.com/c/v8/v8/+/5518892
+
+[338457105][maglev] Don't call CallFunctionForwardVarargs for class constructors.
+https://chromium-review.googlesource.com/c/v8/v8/+/5518454
+Regress test:
+./d8 --allow-natives-syntax regress-338457105.js
+https://github.com/v8/v8/blob/6898a582da9e672db503af0117a47b2f0e861a60/test/mjsunit/maglev/regress-338457105.js
+
+[1523313][turboshaft]v8_wasm_compile_fuzzer: DCHECK failure in (Asm().current_block()) != nullptr in copying-phase.h
+https://chromium-review.googlesource.com/c/v8/v8/+/5253160
+https://issues.chromium.org/issues/41496264
+Regress test:
+./d8 --no-liftoff --turboshaft-wasm regress-1523313.js
+https://chromium.googlesource.com/v8/v8/+/c119a0f4a7735bfe1d751833a89c82edb548bc53/test/mjsunit/regress/wasm/regress-1523313.js
+
+[1523740][wasm]DCHECK failure in old_pages < new_pages in http://wasm-objects.cc
+https://chromium-review.googlesource.com/c/v8/v8/+/5257322
+https://issues.chromium.org/issues/41496688
+Regress test:
+./d8 --stress-wasm-memory-moving regress-1523740.js 
+https://chromium.googlesource.com/v8/v8/+/39d18b4734d86dbc80eec293957d99cdd8f75bea/test/mjsunit/regress/wasm/regress-1523740.js
+
+[339492379][turboshaft] Avoid overflow in loop unrolling approx iteration count
+https://chromium-review.googlesource.com/c/v8/v8/+/5526310
+Regress test:
+./d8 --allow-natives-syntax regress-339492379.js
+https://github.com/v8/v8/blob/585f92b6cfff62b8763c23492f30d9bbbbcdab42/test/mjsunit/compiler/regress-339492379.js
+
+[336507783][wasm][sandbox] Add WasmTrustedInstanceData::native_module
+https://chromium-review.googlesource.com/c/v8/v8/+/5529236
+5.11
