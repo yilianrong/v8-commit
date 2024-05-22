@@ -1,13 +1,3 @@
-[14012]Implement Float16Array, Math.f16round, and related DataView.
-"Deoptimize Maglev and Turbofan until there is machine-level support."
-https://github.com/tc39/proposal-float16array
-https://chromium-review.googlesource.com/c/v8/v8/+/5082566
-
-[327517308][wasm-imported-strings] Fix Number-to-uint32 conversions
-https://chromium-review.googlesource.com/c/v8/v8/+/5339898
-./d8 --wasm-staging regress-327517308.js
-https://github.com/v8/v8/blob/030f11450be0634c7f4c9c156adbdb3509b100c4/test/mjsunit/regress/wasm/regress-327517308.js
-
 [1505224][maglev]DCHECK failure in is_loadable() in maglev-ir.h.
 https://chromium-review.googlesource.com/c/v8/v8/+/5062389
 https://issues.chromium.org/issues/40945827
@@ -17,18 +7,8 @@ https://chromium-review.googlesource.com/c/v8/v8/+/5306934
 ./d8 --allow-natives-syntax --maglev --no-always-turbofan alias-materialized-objects.js
 https://github.com/v8/v8/blob/576176291b947034ea598ea034f225387bb673f1/test/mjsunit/maglev/alias-materialized-objects.js
 
-[327643791][wasm-imported-strings] Fix string-from-data fast path.
-https://chromium-review.googlesource.com/c/v8/v8/+/5345411
-./d8 --wasm-staging regress-327643791.js
-https://github.com/v8/v8/blob/8dd7bd9b9886d59410ca8a42a9344450272676f9/test/mjsunit/regress/wasm/regress-327643791.js
-
 (CVE-2024-2173)[$12000][325893559][wasm][wasm-to-js wrapper]OOB memory access in V8 due to a missing bounds check in tier-up of wasm-to-js wrapper.
 https://chromium-review.googlesource.com/c/v8/v8/+/5323850
-
-(CVE-2024-2174)[$7000][325866363][wasm]Inappropriate implementation in V8.
-Use a previously defined safepoint which might have
-tagged spill slots which are not valid any more at the protected instruction.
-https://chromium-review.googlesource.com/c/v8/v8/+/5317578
 
 [326091155]Revert "[maglev] Simple escape analysis for inlined allocated objects"
 https://chromium-review.googlesource.com/c/v8/v8/+/5348996
@@ -47,12 +27,6 @@ https://issues.chromium.org/issues/40945971
 ./d8 --allow-natives-syntax regression-crbug-1505355.js
 https://chromium.googlesource.com/v8/v8/+/62c1f1fc760ad22f4e68d0e51bb35624414edc25/test/mjsunit/regress/regression-crbug-1505355.js
 
-[12716][revec][wasm][turboshaft]
-Support revectorization of Simd128ShiftOp
-https://chromium-review.googlesource.com/c/v8/v8/+/5342939
-Support revectorization of Ternary op(S128Select) in turboshaft
-https://chromium-review.googlesource.com/c/v8/v8/+/5347281
-
 [1505311][maglev]DCHECK failure in id_ != kInvalidNodeId in maglev-ir.h
 https://issues.chromium.org/issues/40945924
 https://chromium-review.googlesource.com/c/v8/v8/+/5067474
@@ -61,9 +35,6 @@ https://chromium-review.googlesource.com/c/v8/v8/+/5067474
 https://chromium-review.googlesource.com/c/v8/v8/+/5351785
 ./d8 --allow-natives-syntax --maglev regress-328483400.js
 https://github.com/v8/v8/blob/1b90bcf8c66f240d84cc6a6dc138b73b8f35befb/test/mjsunit/maglev/regress-328483400.js
-
-[8800][maglev] Avoid deopt loop when optimizing builtin calls
-https://chromium-review.googlesource.com/c/v8/v8/+/5350602
 
 [v8:7700, 326091155, 328751844][maglev] Add flag and disable escape analysis.
 Temporarily disable escape analysis until all known
@@ -77,9 +48,6 @@ https://chromium-review.googlesource.com/c/v8/v8/+/5344756
 https://chromium-review.googlesource.com/c/v8/v8/+/5361035
 ./d8 --allow-natives-syntax --maglev --maglev-inlining --maglev-escape-analysis regress-328676392.js
 https://github.com/v8/v8/blob/59c8a4462e8b390f95462e0d772ce7d58ffd596e/test/mjsunit/maglev/regress-328676392.js
-
-[7700][maglev] Enable osr phi untagging
-https://chromium-review.googlesource.com/c/v8/v8/+/5340718
 
 [328868985][maglev]Give fresh object ids in inlined functions
 https://chromium-review.googlesource.com/c/v8/v8/+/5361455
@@ -96,32 +64,15 @@ https://chromium-review.googlesource.com/c/v8/v8/+/5361782
 ./d8 --allow-natives-syntax --maglev --maglev-inlining --maglev-escape-analysis regress-328680228.js
 https://github.com/v8/v8/blob/6ff81a19bc79d1bb3047dbfa1ab03d411a2be5ec/test/mjsunit/maglev/regress-328680228.js
 
-[14108][wasm][turboshaft] Optimize statically-in-bounds memory offsets.
-https://chromium-review.googlesource.com/c/v8/v8/+/5367024
-
 [326091155][maglev] Enable escape analysis.
 https://chromium-review.googlesource.com/c/v8/v8/+/5366029
 
 [326091155][maglev] Support inlining allocation of mapped arguments
 https://chromium-review.googlesource.com/c/v8/v8/+/5366454
 
-[1506386][maglev]Debug check failed: label->predecessor_count_ > 1 (1 vs. 1).
-https://issues.chromium.org/issues/40947040
-./d8 --allow-natives-syntax --jit-fuzzing --assert-types qq.js
-https://issues.chromium.org/action/issues/40947040/attachments/53143474?download=true
-
 [1506538][maglev]DCHECK failure in kCanBeWeak || (!IsSmi() == HAS_STRONG_HEAP_OBJECT_TAG(ptr_)) in tagged-impl.h
 https://issues.chromium.org/issues/40947204
 https://chromium-review.googlesource.com/c/v8/v8/+/5079308
-
-[1502416]Debug check failed: HasBytecodeArray().
-https://issues.chromium.org/issues/40942777
-./d8 --expose-gc --omit-quit --allow-natives-syntax --fuzzing --jit-fuzzing --future --harmony --js-staging --turboshaft --maglev --shared-string-table poc.js
-https://issues.chromium.org/action/issues/40942777/attachments/53193066?download=true
-
-[1508367][turboshaft]DCHECK failure in type_ & kIsNotStringMask == kStringTag in string-inl.h
-https://issues.chromium.org/issues/40949087
-https://chromium-review.googlesource.com/c/v8/v8/+/5093327
 
 [1507743][$8000][wasm][exnref]Debug check failed: use->opcode() == IrOpcode::kLoopExitEffect || use->opcode() == IrOpcode::kLoopExitValue.
 https://issues.chromium.org/issues/40948441
@@ -161,9 +112,6 @@ https://chromium-review.googlesource.com/c/v8/v8/+/5366888
 ./d8 --wasm-staging --no-liftoff --turboshaft-wasm regress-329464129.js
 https://github.com/v8/v8/blob/0945c5bddb64d3cad3615aee8f4dfd8c7287e9b3/test/mjsunit/regress/wasm/regress-329464129.js
 
-[329145803][wasm-gc][liftoff] Fix off-by-one in RefAsNonNull
-https://chromium-review.googlesource.com/c/v8/v8/+/5378140
-
 [14398][wasm][exnref] Fix broken abstract casts
 ref.test, ref.cast, br_on_cast, br_on_cast_fail allow arbitrary heap types, so they also allow exnref and noexnref.
 https://chromium-review.googlesource.com/c/v8/v8/+/5372489
@@ -190,9 +138,6 @@ https://issues.chromium.org/issues/41483297
 https://issues.chromium.org/action/issues/41483297/attachments/53059230?download=true
 ./google-chrome --no-sandbox --js-flags="--harmony-set-methods" ex.html
 https://issues.chromium.org/action/issues/41483297/attachments/53059231?download=true
-
-[330575498][turbofan][wasm] Clamp byte length
-https://chromium-review.googlesource.com/c/v8/v8/+/5383483
 
 [326091155][maglev] Drop input use from stores to non-escaping allocations
 https://chromium-review.googlesource.com/c/v8/v8/+/5383474
